@@ -5,7 +5,8 @@ namespace DBAssistance.BussinesLayer.Services.PeriodService
 {
     public interface IPeriodService
     {
-        IEnumerable<Period> Get();
-        IEnumerable<PeriodDto> extra();
+        IEnumerable<Period> GetPeriods();
+        IEnumerable<PeriodDto> GetPeriodsShortInfo();
+        PeriodDto GetPeriod(int periodId);
     }
 }

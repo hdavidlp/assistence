@@ -16,7 +16,6 @@ namespace Assistence.Controllers
     [ApiController]
     public class PeriodController : ControllerBase
     {
-        //private readonly DBAssistenceContext _dbContext;
         private readonly IPeriodService _periodService;
         private readonly IMapper _mapper;
 
@@ -27,19 +26,23 @@ namespace Assistence.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Period>> Get()
+        public ActionResult<IEnumerable<Period>> GetPeriods()
         {
-            return Ok(_periodService.Get());
+            return Ok(_periodService.GetPeriods());
         }
 
         [HttpGet("adicional")]
-        public ActionResult<IEnumerable<PeriodDto>> GetExtra()
+        public ActionResult<IEnumerable<PeriodDto>> GetPeriodsShort()
         {
-            var res = _periodService.extra();
+            var res = _periodService.GetPeriodsShortInfo();
             return Ok(res);
         }
 
+        [HttpGet("id")]
+        public ActionResult<PeriodDto> GetPeriod(int id)
+        {
+            return Ok(_periodService.GetPeriod(id));
+        }
 
-        
     }
 }

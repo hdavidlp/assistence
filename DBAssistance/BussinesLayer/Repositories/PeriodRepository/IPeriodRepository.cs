@@ -4,6 +4,7 @@ namespace DBAssistance.BussinesLayer.Repositories.PeriodRepository
 {
     public interface IPeriodRepository
     {
-        IEnumerable<DataLayer.Entities.Period> Get();
+        IEnumerable<Period> GetPeriods();
+        Period GetPeriod(int periodId);
     }
 }

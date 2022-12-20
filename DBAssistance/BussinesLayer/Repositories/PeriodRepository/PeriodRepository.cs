@@ -17,9 +17,15 @@ namespace DBAssistance.BussinesLayer.Repositories.PeriodRepository
             _dbAssistenceContext = dbAssistanceContext;
         }
 
-        public IEnumerable<Period> Get()
+        public IEnumerable<Period> GetPeriods()
         {
             return _dbAssistenceContext.Period.ToList();
+        }
+        public Period GetPeriod(int periodId)
+        {
+            return  _dbAssistenceContext.Period.Where(p => p.PeriodID == periodId).FirstOrDefault();
+
+            
         }
     }
 }

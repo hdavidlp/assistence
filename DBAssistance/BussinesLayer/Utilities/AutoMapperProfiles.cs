@@ -4,8 +4,6 @@ using DBAssistance.BussinesLayer.Dto;
 using DBAssistance.DataLayer.Entities;
 
 
-
-
 namespace DBAssistance.BussinesLayer.Utilities
 {
     public class AutoMapperProfiles: Profile
@@ -14,7 +12,6 @@ namespace DBAssistance.BussinesLayer.Utilities
         {
             CreateMap<Period, PeriodDto>();
             CreateMap<PeriodDto,Period>();
-
         }
     }
 }

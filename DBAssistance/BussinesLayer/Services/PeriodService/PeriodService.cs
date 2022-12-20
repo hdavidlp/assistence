@@ -22,15 +22,21 @@ namespace DBAssistance.BussinesLayer.Services.PeriodService
             _mapper = mapper;   
         }
 
-        public IEnumerable<DataLayer.Entities.Period> Get()
+        public IEnumerable<Period> GetPeriods()
         {
-            return _periodRepository.Get();
+            return _periodRepository.GetPeriods();
         }
 
-        public IEnumerable<PeriodDto> extra()
+        public IEnumerable<PeriodDto> GetPeriodsShortInfo()
         {
-            var periods = _periodRepository.Get();
+            var periods = _periodRepository.GetPeriods();
             return _mapper.Map<IEnumerable<PeriodDto>>(periods);
         }
+
+        public PeriodDto GetPeriod(int periodId)
+        {
+            return _mapper.Map<PeriodDto>(_periodRepository.GetPeriod(periodId));
+        }
+
     }
 }

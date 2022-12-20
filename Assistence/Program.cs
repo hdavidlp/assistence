@@ -12,19 +12,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
 builder.Services.AddDbContext<DBAssistenceContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("AssistenceConnectionString"));
 });
 
-builder.Services.AddAutoMapper(typeof(Program));
+//builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddScoped<IPeriodRepository, PeriodRepository>();
 builder.Services.AddScoped<IPeriodService, PeriodService>();
-
-
-
 
 var app = builder.Build();
 
