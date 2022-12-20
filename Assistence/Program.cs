@@ -1,4 +1,6 @@
 using DBAssistance;
+using DBAssistance.BussinesLayer.Repositories.PeriodRepository;
+using DBAssistance.BussinesLayer.Services.PeriodService;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +18,12 @@ builder.Services.AddDbContext<DBAssistenceContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("AssistenceConnectionString"));
 });
 
+builder.Services.AddAutoMapper(typeof(Program));
+
+builder.Services.AddScoped<IPeriodRepository, PeriodRepository>();
+builder.Services.AddScoped<IPeriodService, PeriodService>();
+
+
 
 
 var app = builder.Build();
@@ -25,9 +33,6 @@ using (var scope = app.Services.CreateScope())
     var context = scope.ServiceProvider.GetRequiredService<DBAssistenceContext>();  
     context.Database.Migrate();
 }
-
-
-
 
     // Configure the HTTP request pipeline.
     if (app.Environment.IsDevelopment())

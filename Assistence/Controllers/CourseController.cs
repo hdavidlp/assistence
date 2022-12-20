@@ -1,7 +1,8 @@
 ﻿using DBAssistance;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using DBAssistance.Entities;
+using DBAssistance.DataLayer.Entities;
+
 
 namespace Assistence.Controllers
 {

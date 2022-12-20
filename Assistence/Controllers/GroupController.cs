@@ -1,7 +1,8 @@
 ﻿using DBAssistance;
-using DBAssistance.Entities;
+using DBAssistance.DataLayer.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Assistence.Controllers
 {
@@ -19,8 +20,7 @@ namespace Assistence.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Group>> Get()
         {
-            return Ok(_dbContext.Group.ToList());
-
+            return Ok(_dbContext.Group.Include(p => p.Period).ToList());
         }
     }
 }

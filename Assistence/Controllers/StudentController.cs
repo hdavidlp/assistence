@@ -1,5 +1,5 @@
 ﻿using DBAssistance;
-using DBAssistance.Entities;
+using DBAssistance.DataLayer.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

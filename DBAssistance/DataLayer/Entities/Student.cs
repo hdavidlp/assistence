@@ -6,15 +6,13 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DBAssistance.Entities
+namespace DBAssistance.DataLayer.Entities
 {
-    public class Period
+    public class Student
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int PeriodID { get; set; }   
-        public string LongDescription { get; set; }
-        public string ShortDescription { get; set; }
-        public bool IsActive { get; set; }  
+        public int StudentId { get; set; } 
+        public string Name { get; set; }    
     }
 }

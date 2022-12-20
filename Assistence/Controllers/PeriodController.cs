@@ -1,7 +1,14 @@
-﻿using DBAssistance;
-using DBAssistance.Entities;
+﻿
+using AutoMapper;
+using DBAssistance.BussinesLayer.Dto;
+using DBAssistance.BussinesLayer.Services.PeriodService;
+using DBAssistance.DataLayer.Entities;
+
+using AutoMapper.QueryableExtensions;
+using DBAssistance;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Assistence.Controllers
 {
@@ -9,18 +16,29 @@ namespace Assistence.Controllers
     [ApiController]
     public class PeriodController : ControllerBase
     {
-        private readonly DBAssistenceContext _dbContext;
+        //private readonly DBAssistenceContext _dbContext;
+        private readonly IPeriodService _periodService;
+        private readonly IMapper _mapper;
 
-        public PeriodController(DBAssistenceContext dbContext)
+        public PeriodController(IPeriodService periodService, IMapper mapper)
         {
-            _dbContext = dbContext;
+            _periodService=periodService;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public ActionResult<IEnumerable<Period>> Get()
         {
-            return Ok(_dbContext.Period.ToList());
+            return Ok(_periodService.Get());
         }
+
+        [HttpGet("adicional")]
+        public ActionResult<IEnumerable<PeriodDto>> GetExtra()
+        {
+            var res = _periodService.extra();
+            return Ok(res);
+        }
+
 
         
     }

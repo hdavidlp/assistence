@@ -1,4 +1,4 @@
-﻿using DBAssistance.Entities;
+﻿using DBAssistance.DataLayer.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace DBAssistance

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DBAssistance.Entities
+namespace DBAssistance.DataLayer.Entities
 {
     public class Group
     {
