@@ -35,10 +35,9 @@ namespace DBAssistance.BussinesLayer.Services.CourseService
 
         public CourseDto GetCourseByID(int id)
         {
-            var courseSelected = _courseRepository.GetCourses().Where(c => c.CourseID == id).FirstOrDefault();
+            var courseSelected =   _courseRepository.GetCourse(id);
             return _mapper.Map<CourseDto>(courseSelected);
         }
-
 
     }
 }
