@@ -11,7 +11,7 @@ namespace DBAssistance.BussinesLayer.Utilities
         public AutoMapperProfiles()
         {
             CreateMap<Period, PeriodDto>();
-            CreateMap<PeriodDto,Period>();
+            CreateMap<Course, CourseDto>(); 
         }
     }
 }

@@ -2,7 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using DBAssistance.DataLayer.Entities;
-
+using DBAssistance.BussinesLayer.Services.CourseService;
+using DBAssistance.BussinesLayer.Dto;
 
 namespace Assistence.Controllers
 {
@@ -10,17 +11,30 @@ namespace Assistence.Controllers
     [ApiController]
     public class CourseController : ControllerBase
     {
-        private readonly DBAssistenceContext _dbContext;
+        
+        private readonly ICourseService _courseService;
 
-        public CourseController(DBAssistenceContext dbContext)
+        public CourseController(ICourseService courseService )
         {
-            _dbContext = dbContext;
+            _courseService = courseService ?? throw new ArgumentNullException( nameof( courseService ) );
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Course>> Get()
+        public ActionResult<IEnumerable<Course>> GetCourses()
         {
-            return Ok(_dbContext.Course.ToList());
+            return Ok(_courseService.GetCourses());
+        }
+
+        [HttpGet("getshort")]
+        public ActionResult<IEnumerable<CourseDto>> GetCoursesDto()
+        {
+            return Ok(_courseService.GetCoursesDto());
+        }
+
+        [HttpGet("id")]
+        public ActionResult<CourseDto> GetCourseById(int id)
+        {
+            return Ok(_courseService.GetCourseByID(id));
         }
     }
 }

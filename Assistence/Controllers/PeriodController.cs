@@ -21,8 +21,8 @@ namespace Assistence.Controllers
 
         public PeriodController(IPeriodService periodService, IMapper mapper)
         {
-            _periodService=periodService;
-            _mapper = mapper;
+            _periodService=periodService ?? throw new ArgumentNullException(nameof(periodService));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper)) ;
         }
 
         [HttpGet]
@@ -31,7 +31,7 @@ namespace Assistence.Controllers
             return Ok(_periodService.GetPeriods());
         }
 
-        [HttpGet("adicional")]
+        [HttpGet("getshort")]
         public ActionResult<IEnumerable<PeriodDto>> GetPeriodsShort()
         {
             var res = _periodService.GetPeriodsShortInfo();
