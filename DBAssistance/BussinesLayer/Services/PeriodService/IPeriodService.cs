@@ -8,5 +8,8 @@ namespace DBAssistance.BussinesLayer.Services.PeriodService
         IEnumerable<Period> GetPeriods();
         IEnumerable<PeriodDto> GetPeriodsShortInfo();
         PeriodDto GetPeriod(int periodId);
+        Task<bool> AddPeriod(Period period);
+        Task<Period> GetPeriodAsync(int id);
+        Task<bool> DeletePeriod(Period period);
     }
 }

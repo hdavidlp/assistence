@@ -34,7 +34,22 @@ namespace DBAssistance.BussinesLayer.Services.PeriodService
 
         public PeriodDto GetPeriod(int periodId)
         {
-            return _mapper.Map<PeriodDto>(_periodRepository.GetPeriod(periodId));
+            return _mapper.Map<PeriodDto>(_periodRepository.GetPeriodAsync(periodId));
+        }
+
+        public async Task<Period> GetPeriodAsync(int id)
+        {
+            return await _periodRepository.GetPeriodAsync(id);
+        }
+
+        public async Task<bool> AddPeriod(Period period)
+        {
+            return await _periodRepository.AddPeriod(period);
+        }
+
+        public async Task<bool> DeletePeriod(Period period)
+        {
+            return await _periodRepository.DeletePeriod(period);
         }
 
     }

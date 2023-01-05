@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using DBAssistance.DataLayer.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace DBAssistance.BussinesLayer.Repositories.PeriodRepository
 {
@@ -21,9 +22,31 @@ namespace DBAssistance.BussinesLayer.Repositories.PeriodRepository
         {
             return _dbAssistenceContext.Period.ToList();
         }
-        public Period GetPeriod(int periodId)
+        public async Task<Period> GetPeriodAsync(int periodId)
         {
-            return  _dbAssistenceContext.Period.Where(p => p.PeriodID == periodId).FirstOrDefault();
+            //return  _dbAssistenceContext.Period.Where(p => p.PeriodID == periodId).FirstOrDefault();
+            return await _dbAssistenceContext.Period.Where(p => p.PeriodID == periodId).FirstOrDefaultAsync();
         }
+
+        public async Task<bool> AddPeriod (Period period)
+        {
+            _dbAssistenceContext.Period.Add(period);
+            return await SaveChangesAsync();
+        }
+
+        public async Task<bool> DeletePeriod(Period period)
+        {
+            _dbAssistenceContext?.Period.Remove(period);    
+            return await SaveChangesAsync();
+        }
+
+        public async Task<bool> SaveChangesAsync()
+        {
+            return await _dbAssistenceContext.SaveChangesAsync() >= 0;
+        }
+
+        
+
+
     }
 }

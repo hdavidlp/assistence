@@ -5,6 +5,8 @@ namespace DBAssistance.BussinesLayer.Repositories.PeriodRepository
     public interface IPeriodRepository
     {
         IEnumerable<Period> GetPeriods();
-        Period GetPeriod(int periodId);
+        Task<Period> GetPeriodAsync(int periodId);
+        Task<bool> AddPeriod(Period period);
+        Task<bool> DeletePeriod(Period period);
     }
 }

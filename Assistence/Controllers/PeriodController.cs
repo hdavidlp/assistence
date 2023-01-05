@@ -44,5 +44,29 @@ namespace Assistence.Controllers
             return Ok(_periodService.GetPeriod(id));
         }
 
+        [HttpPost]
+        public async Task<ActionResult<PeriodForCreation>> CreatePeriod(PeriodForCreation period)
+        {
+            var newPeriod = _mapper.Map<Period>(period);
+
+            if(await _periodService.AddPeriod(newPeriod))
+                return Ok(_mapper.Map<PeriodForCreation>(newPeriod));
+            return BadRequest();
+        }
+
+        [HttpDelete("id")]
+        public async Task<ActionResult> DeletePeriod(int id)
+        {
+            var periodEntity = await _periodService.GetPeriodAsync(id);
+
+            if (periodEntity == null) return NotFound();
+
+            bool deleteSuccess = await _periodService.DeletePeriod(periodEntity);
+
+            if (deleteSuccess) return NoContent();
+            else return BadRequest();
+
+        }
+
     }
 }
