@@ -24,8 +24,6 @@ namespace DBAssistance.BussinesLayer.Repositories.PeriodRepository
         public Period GetPeriod(int periodId)
         {
             return  _dbAssistenceContext.Period.Where(p => p.PeriodID == periodId).FirstOrDefault();
-
-            
         }
     }
 }

@@ -6,9 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DBAssistance.BussinesLayer.Repositories.PeriodRepository;
-using DBAssistance.BussinesLayer.Dto;
 using DBAssistance.DataLayer.Entities;
-
+using DBAssistance.BussinesLayer.Dto.Period;
 
 namespace DBAssistance.BussinesLayer.Services.PeriodService
 {

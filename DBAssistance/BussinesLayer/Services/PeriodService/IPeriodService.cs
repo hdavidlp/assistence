@@ -1,4 +1,4 @@
-﻿using DBAssistance.BussinesLayer.Dto;
+﻿using DBAssistance.BussinesLayer.Dto.Period;
 using DBAssistance.DataLayer.Entities;
 
 namespace DBAssistance.BussinesLayer.Services.PeriodService

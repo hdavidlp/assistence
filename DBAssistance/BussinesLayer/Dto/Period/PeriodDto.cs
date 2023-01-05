@@ -1,4 +1,4 @@
-﻿namespace DBAssistance.BussinesLayer.Dto
+﻿namespace DBAssistance.BussinesLayer.Dto.Period
 {
     public class PeriodDto
     {

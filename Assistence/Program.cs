@@ -2,13 +2,15 @@ using DBAssistance;
 using DBAssistance.BussinesLayer.Repositories.PeriodRepository;
 using DBAssistance.BussinesLayer.Repositories.CourseRepository;
 using DBAssistance.BussinesLayer.Repositories.StudentRepository;
+using DBAssistance.BussinesLayer.Repositories.GroupRepository;
 
 using DBAssistance.BussinesLayer.Services.PeriodService;
 using DBAssistance.BussinesLayer.Services.CourseService;
-
+using DBAssistance.BussinesLayer.Services.StudentService;
+using DBAssistance.BussinesLayer.Services.GroupService;
 
 using Microsoft.EntityFrameworkCore;
-using DBAssistance.BussinesLayer.Services.StudentService;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,11 +32,13 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IPeriodRepository, PeriodRepository>();
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+builder.Services.AddScoped<IGroupRepository, GroupRepository>();    
 
 
 builder.Services.AddScoped<IPeriodService, PeriodService>();
 builder.Services.AddScoped<ICourseService, CourseService>();
 builder.Services.AddScoped<IStudentService, StudentService>();
+builder.Services.AddScoped<IGroupService, GroupService>();
 
 
 

@@ -17,12 +17,15 @@ namespace DBAssistance.BussinesLayer.Repositories.CourseRepository
 
         public CourseRepository(DBAssistenceContext dbAssistenceContext)
         {
-            _dbAssistenceContext = dbAssistenceContext ?? throw new ArgumentNullException(nameof(dbAssistenceContext));
+            _dbAssistenceContext = dbAssistenceContext ?? 
+                throw new ArgumentNullException(nameof(dbAssistenceContext));
         }
 
         public Course GetCourse(int id)
         {
-            var courseSelected = _dbAssistenceContext.Course.Where(c => c.CourseID == id).FirstOrDefault();
+            var courseSelected = _dbAssistenceContext.Course.
+                Where(c => c.CourseID == id).FirstOrDefault();
+
             return courseSelected;
         }
 
