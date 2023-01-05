@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using DBAssistance.BussinesLayer.Dto;
+using DBAssistance.BussinesLayer.Dto.Course;
 using DBAssistance.BussinesLayer.Repositories.CourseRepository;
 using DBAssistance.DataLayer.Entities;
 using System;
@@ -35,8 +35,24 @@ namespace DBAssistance.BussinesLayer.Services.CourseService
 
         public CourseDto GetCourseByID(int id)
         {
-            var courseSelected =   _courseRepository.GetCourse(id);
+            var courseSelected =   _courseRepository.GetCourseAsync(id);
             return _mapper.Map<CourseDto>(courseSelected);
+        }
+
+        public async Task<bool> createCourse(Course course)
+        {
+            return await _courseRepository.createCourse(course);
+        }
+        
+        public async Task<Course> GetCourseByIdAsync(int id)
+        {
+            return await _courseRepository.GetCourseAsync(id);
+
+        }
+
+        public async Task<bool> DeleteCourse(Course course)
+        {
+            return await _courseRepository.DeleteCourse(course);
         }
 
     }

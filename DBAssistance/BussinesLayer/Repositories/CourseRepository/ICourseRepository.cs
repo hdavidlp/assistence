@@ -6,6 +6,8 @@ namespace DBAssistance.BussinesLayer.Repositories.CourseRepository
     public interface ICourseRepository
     {
         IEnumerable<Course> GetCourses();
-        Course GetCourse(int id);
+        Task<Course> GetCourseAsync(int id);
+        Task<bool> createCourse(Course course);
+        Task<bool> DeleteCourse(Course course);
     }
 }

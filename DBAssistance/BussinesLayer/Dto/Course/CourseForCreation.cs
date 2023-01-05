@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DBAssistance.BussinesLayer.Dto
+namespace DBAssistance.BussinesLayer.Dto.Course
 {
-    public class CourseDto
+    public class CourseForCreation
     {
-        //public int CourseID { get; set; }
         public string Name { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using DBAssistance.BussinesLayer.Dto;
 using DBAssistance.BussinesLayer.Services.PeriodService;
 using DBAssistance.DataLayer.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,10 +22,10 @@ namespace DBAssistance.BussinesLayer.Repositories.CourseRepository
                 throw new ArgumentNullException(nameof(dbAssistenceContext));
         }
 
-        public Course GetCourse(int id)
+        public async Task<Course> GetCourseAsync(int id)
         {
-            var courseSelected = _dbAssistenceContext.Course.
-                Where(c => c.CourseID == id).FirstOrDefault();
+            var courseSelected = await _dbAssistenceContext.Course.
+                Where(c => c.CourseID == id).FirstAsync();
 
             return courseSelected;
         }
@@ -33,6 +34,24 @@ namespace DBAssistance.BussinesLayer.Repositories.CourseRepository
         {
             return _dbAssistenceContext.Course.ToList();
         }
+
+        public async Task <bool> createCourse(Course course)
+        {
+            _dbAssistenceContext.Course.Add(course);
+            return await SaveChangesAsync();
+        }
+
+        public async Task<bool> DeleteCourse(Course course)
+        {
+            _dbAssistenceContext.Course.Remove(course);
+            return await SaveChangesAsync();
+        }
+
+        public async Task<bool> SaveChangesAsync()
+        {
+            return await _dbAssistenceContext.SaveChangesAsync() >= 0;
+        }
+
 
     }
 }

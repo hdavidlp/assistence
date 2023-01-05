@@ -1,4 +1,4 @@
-﻿using DBAssistance.BussinesLayer.Dto;
+﻿using DBAssistance.BussinesLayer.Dto.Course;
 using DBAssistance.DataLayer.Entities;
 
 namespace DBAssistance.BussinesLayer.Services.CourseService
@@ -8,5 +8,8 @@ namespace DBAssistance.BussinesLayer.Services.CourseService
         IEnumerable<Course> GetCourses();
         IEnumerable<CourseDto> GetCoursesDto();
         CourseDto GetCourseByID(int id);
+        Task<bool> createCourse(Course course);
+        Task<Course> GetCourseByIdAsync(int id);
+        Task<bool> DeleteCourse(Course course);
     }
 }

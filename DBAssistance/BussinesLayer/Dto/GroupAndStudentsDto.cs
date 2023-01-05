@@ -1,4 +1,5 @@
-﻿using DBAssistance.DataLayer.Entities;
+﻿using DBAssistance.BussinesLayer.Dto.Course;
+using DBAssistance.DataLayer.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
