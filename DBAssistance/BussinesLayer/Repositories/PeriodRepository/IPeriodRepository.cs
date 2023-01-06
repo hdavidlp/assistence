@@ -8,5 +8,7 @@ namespace DBAssistance.BussinesLayer.Repositories.PeriodRepository
         Task<Period> GetPeriodAsync(int periodId);
         Task<bool> AddPeriod(Period period);
         Task<bool> DeletePeriod(Period period);
+        Task<bool> PeriodExistAsync(int id);
+        Task<bool> UpdatePeriod();
     }
 }

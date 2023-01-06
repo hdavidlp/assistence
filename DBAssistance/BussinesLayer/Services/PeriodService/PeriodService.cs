@@ -47,6 +47,17 @@ namespace DBAssistance.BussinesLayer.Services.PeriodService
             return await _periodRepository.AddPeriod(period);
         }
 
+        public async Task<bool> UpdatePeriod(int id, PeriodForUpdateDto period)
+        {
+            if (!(await _periodRepository.PeriodExistAsync(id))) return false;
+
+            var selectedPeriod = await _periodRepository.GetPeriodAsync(id);
+
+            _mapper.Map(period, selectedPeriod);
+            return await _periodRepository.UpdatePeriod();
+
+        }
+
         public async Task<bool> DeletePeriod(Period period)
         {
             return await _periodRepository.DeletePeriod(period);

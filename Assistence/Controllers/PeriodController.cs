@@ -54,6 +54,16 @@ namespace Assistence.Controllers
             return BadRequest();
         }
 
+        [HttpPut ("id")]
+        public async Task<ActionResult> UpdatePeriod (int id, PeriodForUpdateDto period)
+        {
+            var updateSuccess = await _periodService.UpdatePeriod(id, period);
+            if (!updateSuccess) return NotFound();
+
+            return NoContent();
+
+        }
+
         [HttpDelete("id")]
         public async Task<ActionResult> DeletePeriod(int id)
         {

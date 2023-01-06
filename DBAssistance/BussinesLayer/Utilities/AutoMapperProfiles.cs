@@ -15,10 +15,14 @@ namespace DBAssistance.BussinesLayer.Utilities
             CreateMap<Period, PeriodDto>();
             CreateMap<PeriodForCreation, Period>();
             CreateMap<Period, PeriodForCreation>();
+            CreateMap<PeriodForUpdateDto, Period>();
+
 
             CreateMap<Course, CourseDto>();
             CreateMap<CourseForCreation, Course>();
             CreateMap<Course, CourseForCreation>();
+            CreateMap<CourseForUpdateDto, Course>();
+
 
             CreateMap<Student, StudentDto>();
             CreateMap<Group, GroupDto>();

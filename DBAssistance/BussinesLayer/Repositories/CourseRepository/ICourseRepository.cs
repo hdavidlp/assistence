@@ -9,5 +9,7 @@ namespace DBAssistance.BussinesLayer.Repositories.CourseRepository
         Task<Course> GetCourseAsync(int id);
         Task<bool> createCourse(Course course);
         Task<bool> DeleteCourse(Course course);
+        Task<bool> UpdateCourse();
+        Task<bool> CourseExistAsync(int id);
     }
 }

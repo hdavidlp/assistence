@@ -11,5 +11,6 @@ namespace DBAssistance.BussinesLayer.Services.PeriodService
         Task<bool> AddPeriod(Period period);
         Task<Period> GetPeriodAsync(int id);
         Task<bool> DeletePeriod(Period period);
+        Task<bool> UpdatePeriod(int id, PeriodForUpdateDto period);
     }
 }

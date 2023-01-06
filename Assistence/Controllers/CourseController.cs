@@ -65,5 +65,15 @@ namespace Assistence.Controllers
             if (deleteSuccess) return NoContent();
             else return BadRequest();
         }
+
+        [HttpPut("id")]
+        public async Task<ActionResult> UpdateCourse(int id, CourseForUpdateDto course)
+        {
+            var updateSuccess = await _courseService.UpdateCourse(id, course);
+            if (!updateSuccess) return NotFound("");                
+
+            return Ok();
+        }
+
     }
 }

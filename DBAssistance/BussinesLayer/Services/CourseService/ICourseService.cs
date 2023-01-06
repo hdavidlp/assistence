@@ -11,5 +11,6 @@ namespace DBAssistance.BussinesLayer.Services.CourseService
         Task<bool> createCourse(Course course);
         Task<Course> GetCourseByIdAsync(int id);
         Task<bool> DeleteCourse(Course course);
+        Task<bool> UpdateCourse(int id, CourseForUpdateDto course);
     }
 }

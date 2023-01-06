@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DBAssistance.BussinesLayer.Dto;
+using DBAssistance.BussinesLayer.Dto.Course;
 using DBAssistance.BussinesLayer.Services.PeriodService;
 using DBAssistance.DataLayer.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +21,11 @@ namespace DBAssistance.BussinesLayer.Repositories.CourseRepository
         {
             _dbAssistenceContext = dbAssistenceContext ?? 
                 throw new ArgumentNullException(nameof(dbAssistenceContext));
+        }
+
+        public async Task<bool> CourseExistAsync(int id)
+        {
+            return await _dbAssistenceContext.Course.AnyAsync(c => c.CourseID == id);
         }
 
         public async Task<Course> GetCourseAsync(int id)
@@ -44,6 +50,11 @@ namespace DBAssistance.BussinesLayer.Repositories.CourseRepository
         public async Task<bool> DeleteCourse(Course course)
         {
             _dbAssistenceContext.Course.Remove(course);
+            return await SaveChangesAsync();
+        }
+
+        public async Task<bool> UpdateCourse()
+        {
             return await SaveChangesAsync();
         }
 

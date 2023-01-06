@@ -50,6 +50,19 @@ namespace DBAssistance.BussinesLayer.Services.CourseService
 
         }
 
+        public async Task<bool> UpdateCourse(int id, CourseForUpdateDto course)
+        {
+            if (!(await _courseRepository.CourseExistAsync(id))) return false;
+
+            var selectedCourse = await _courseRepository.GetCourseAsync(id);
+
+            if (selectedCourse == null) return false;
+
+            _mapper.Map(course, selectedCourse);
+
+            return await _courseRepository.UpdateCourse();
+        }
+
         public async Task<bool> DeleteCourse(Course course)
         {
             return await _courseRepository.DeleteCourse(course);

@@ -18,6 +18,11 @@ namespace DBAssistance.BussinesLayer.Repositories.PeriodRepository
             _dbAssistenceContext = dbAssistanceContext;
         }
 
+        public async Task<bool> PeriodExistAsync (int id)
+        {
+            return await _dbAssistenceContext.Period.AnyAsync(p => p.PeriodID == id);
+        }
+
         public IEnumerable<Period> GetPeriods()
         {
             return _dbAssistenceContext.Period.ToList();
@@ -31,6 +36,11 @@ namespace DBAssistance.BussinesLayer.Repositories.PeriodRepository
         public async Task<bool> AddPeriod (Period period)
         {
             _dbAssistenceContext.Period.Add(period);
+            return await SaveChangesAsync();
+        }
+
+        public async Task<bool> UpdatePeriod()
+        {
             return await SaveChangesAsync();
         }
 
