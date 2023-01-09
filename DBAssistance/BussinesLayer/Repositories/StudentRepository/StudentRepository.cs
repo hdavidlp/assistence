@@ -1,4 +1,5 @@
 ﻿using DBAssistance.DataLayer.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,27 @@ namespace DBAssistance.BussinesLayer.Repositories.StudentRepository
         public Student GetStudent(int id)
         {
             return _dbAssistenceContext.Student.Where(s => s.StudentId == id).FirstOrDefault();
+        }
+
+        public async Task<Student> GetStudentAsync(int id)
+        {
+            return await _dbAssistenceContext.Student.Where(s => s.StudentId == id).FirstAsync();
+        }
+
+        public async Task<bool> StudentExistAsync(int id)
+        {
+            return await _dbAssistenceContext.Student.AnyAsync(s => s.StudentId == id);
+        }
+
+        public async Task<bool> CreateStudent(Student student)
+        {
+            _dbAssistenceContext.Student.Add(student);
+            return await  SaveChangesAsync();
+        }
+
+        public async Task<bool> SaveChangesAsync()
+        {
+            return await _dbAssistenceContext.SaveChangesAsync() >= 0;
         }
 
 

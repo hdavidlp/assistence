@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using DBAssistance.BussinesLayer.Dto;
+using DBAssistance.BussinesLayer.Dto.Student;
 using DBAssistance.BussinesLayer.Repositories.StudentRepository;
 using DBAssistance.DataLayer.Entities;
 using System;
@@ -38,6 +38,17 @@ namespace DBAssistance.BussinesLayer.Services.StudentService
         {
             var studentSelected = _studentRepository.GetStudent(id);
             return _mapper.Map<StudentDto>(studentSelected);    
+        }
+
+        public async Task<StudentDto> GetStudentAsync(int id)
+        {
+            var studentSelected = await _studentRepository.GetStudentAsync(id);
+            return  _mapper.Map<StudentDto>(studentSelected);
+        }
+
+        public async Task<bool> CreateStudent(Student student)
+        {
+            return await _studentRepository.CreateStudent(student);
         }
     }
 }

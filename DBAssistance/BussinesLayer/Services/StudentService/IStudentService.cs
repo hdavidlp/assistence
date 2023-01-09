@@ -1,4 +1,4 @@
-﻿using DBAssistance.BussinesLayer.Dto;
+﻿using DBAssistance.BussinesLayer.Dto.Student;
 using DBAssistance.DataLayer.Entities;
 
 namespace DBAssistance.BussinesLayer.Services.StudentService
@@ -8,5 +8,7 @@ namespace DBAssistance.BussinesLayer.Services.StudentService
         IEnumerable<Student> GetStudents();
         IEnumerable<StudentDto> GetStudentsDto();
         StudentDto GetStudentDto(int id);
+        Task<StudentDto> GetStudentAsync(int id);
+        Task<bool> CreateStudent(Student student);
     }
 }

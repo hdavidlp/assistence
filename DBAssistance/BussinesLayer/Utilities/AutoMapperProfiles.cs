@@ -3,6 +3,7 @@ using AutoMapper;
 using DBAssistance.BussinesLayer.Dto;
 using DBAssistance.BussinesLayer.Dto.Course;
 using DBAssistance.BussinesLayer.Dto.Period;
+using DBAssistance.BussinesLayer.Dto.Student;
 using DBAssistance.DataLayer.Entities;
 
 
@@ -25,6 +26,9 @@ namespace DBAssistance.BussinesLayer.Utilities
 
 
             CreateMap<Student, StudentDto>();
+            CreateMap<StudentForCreationDto, Student>();
+
+
             CreateMap<Group, GroupDto>();
             CreateMap<Group, GroupAndStudentsDto>();
         }

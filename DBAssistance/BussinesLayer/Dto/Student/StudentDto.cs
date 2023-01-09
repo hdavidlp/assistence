@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DBAssistance.BussinesLayer.Dto
+namespace DBAssistance.BussinesLayer.Dto.Student
 {
-    public  class StudentDto
+    public class StudentDto
     {
         public int StudentId { get; set; }
         public string Name { get; set; }
