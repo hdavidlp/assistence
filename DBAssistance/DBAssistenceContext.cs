@@ -16,6 +16,7 @@ namespace DBAssistance
         public DbSet<Period> Period { get; set; }
         
         public DbSet<Group> Group{ get; set; }
+        public DbSet<Timetable> Timetable { get; set; }
         
 
     }

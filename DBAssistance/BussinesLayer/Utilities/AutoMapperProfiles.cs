@@ -4,6 +4,7 @@ using DBAssistance.BussinesLayer.Dto;
 using DBAssistance.BussinesLayer.Dto.Course;
 using DBAssistance.BussinesLayer.Dto.Period;
 using DBAssistance.BussinesLayer.Dto.Student;
+using DBAssistance.BussinesLayer.Dto.Timetable;
 using DBAssistance.DataLayer.Entities;
 
 
@@ -31,6 +32,9 @@ namespace DBAssistance.BussinesLayer.Utilities
 
             CreateMap<Group, GroupDto>();
             CreateMap<Group, GroupAndStudentsDto>();
+
+            CreateMap<Timetable, TimetableDto>();
+            CreateMap<TimetableForCreation, Timetable>();
         }
     }
 }
