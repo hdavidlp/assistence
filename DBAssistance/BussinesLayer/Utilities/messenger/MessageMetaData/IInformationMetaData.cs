@@ -1,4 +1,4 @@
-﻿namespace DBAssistance.BussinesLayer.Utilities.messenger
+﻿namespace DBAssistance.BussinesLayer.Utilities.messenger.MessageMetaData
 {
     public interface IInformationMetaData
     {

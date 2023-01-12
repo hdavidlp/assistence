@@ -1,13 +1,16 @@
 ﻿using AutoMapper;
 using DBAssistance.BussinesLayer.Dto.Timetable;
 using DBAssistance.BussinesLayer.Repositories.TimetableRepository;
-using DBAssistance.BussinesLayer.Utilities.messenger;
+using DBAssistance.BussinesLayer.Utilities.messenger.TimetableMessages;
+using DBAssistance.BussinesLayer.Utilities.messenger.MessageMetaData;
+using DBAssistance.BussinesLayer.Services.TimetableService.TimetableKeySuggest;
 using DBAssistance.DataLayer.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DBAssistance.BussinesLayer.Services.TimetableService.TimetableValidator;
 
 namespace DBAssistance.BussinesLayer.Services.TimetableService
 {
@@ -44,23 +47,53 @@ namespace DBAssistance.BussinesLayer.Services.TimetableService
             return timetable;
         }
 
-        public async Task<(bool, IInformationMetaData)> CreateTimetable (Timetable timetable)
+        public async Task<(bool, ICollection<IInformationMetaData>)> CreateTimetable (Timetable timetable)
         {
-            KeyBuilderForTimeTable keyManagement = 
-                new KeyBuilderForTimeTable(timetable.startTime, timetable.endTime);
+            ITimetableKeyHelper timetableKeyHelper =
+                new TimetableKeyHelper(
+                    new PeriodBetweenHours(
+                        new Hour24(timetable.startTime),
+                        new Hour24(timetable.endTime)));
 
-            if (!keyManagement.IsValidStarTime) 
-                return (false, new InvalidTimeMessage(keyManagement.StartTime));
-            if (!keyManagement.IsValidTimeTable) 
-                return (false, new InvalidTimeMessage(keyManagement.EndTime));
+            if (!timetableKeyHelper.PeriodValidator.IsValidTimeTable)
+                return (false, timetableKeyHelper.PeriodValidator.Information());
 
-            timetable.keyId = keyManagement.keySuggest;
+            timetable.keyId = timetableKeyHelper.keySuggest();
 
             if (await _timetableRepository.TimetableKeyExistAsync(timetable.keyId))
-                return (false, new KeyIdExistMessage());
+                return (false, new KeyIdExistMessage[0]);
+                
 
             return (await _timetableRepository.CreateTimeTableAsync(timetable),
-                new TimetableCreatedMessage());
+                new TimetableCreatedMessage[0]);
+        }
+
+        public async Task<(bool, ICollection<IInformationMetaData>)> UpdateTimetable(
+            int id, TimetableForUpdateDto timetable)
+        {
+            ITimetableKeyHelper timetableKeyHelper =
+                new TimetableKeyHelper(
+                    new PeriodBetweenHours(
+                        new Hour24(timetable.startTime),
+                        new Hour24(timetable.endTime)));
+
+            if (!timetableKeyHelper.PeriodValidator.IsValidTimeTable)
+                return (false, timetableKeyHelper.PeriodValidator.Information());
+
+            int keyId = timetableKeyHelper.keySuggest();
+
+            if (await _timetableRepository.TimetableKeyExistAsync(keyId))
+                return (false, new KeyIdExistMessage[0]);
+
+            var selectedTimetable = await _timetableRepository.GetTimetableAsync(id);
+            _mapper.Map(timetable, selectedTimetable);
+
+            selectedTimetable.keyId = keyId;
+            var updateSuccess= await _timetableRepository.UpdateTimetable();
+
+            if (!updateSuccess) return (false, new UpdateNotComplete[0]);
+
+            return (true, new UpdateSuccess[0]);
         }
     }
 }

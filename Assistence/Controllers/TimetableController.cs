@@ -47,5 +47,15 @@ namespace Assistence.Controllers
 
             return Ok(timeTableEntity);
         }
+
+        [HttpPatch("id")]
+        public async Task<ActionResult> UpdateTimetable (int id, TimetableForUpdateDto timetable )
+        {
+            var (updateSuccess, info) = await _timetableService.UpdateTimetable(id, timetable);
+            
+            if (!updateSuccess) return BadRequest(info);
+
+            return Ok(info);
+        }
     }
 }

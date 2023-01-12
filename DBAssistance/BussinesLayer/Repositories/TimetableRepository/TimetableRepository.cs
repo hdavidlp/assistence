@@ -29,6 +29,19 @@ namespace DBAssistance.BussinesLayer.Repositories.TimetableRepository
             return await SaveChangesAsync();
         }
 
+        public async Task<bool> UpdateTimetable()
+        {
+            return await SaveChangesAsync();
+        }
+
+        public async Task<Timetable> GetTimetableAsync(int id)
+        {
+            var timeTableSelected = await _dbAssistenceContext.Timetable
+                .Where(t => t.idTimeTable == id).FirstAsync();
+
+            return timeTableSelected;
+        }
+
         public async Task<bool> TimetableKeyExistAsync(int key)
         {
             return await _dbAssistenceContext.Timetable.AnyAsync(t => t.keyId == key);

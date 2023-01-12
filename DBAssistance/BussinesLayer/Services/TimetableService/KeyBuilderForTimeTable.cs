@@ -14,9 +14,7 @@ namespace DBAssistance.BussinesLayer.Services.TimetableService
         private string _endTime;
         private bool _isValidStarTime = false;
         private bool _isValidEndTime = false;
-        //private bool _keyIdExist = false;
 
-        
         public string StartTime
         {
             get { return _startTime; }
@@ -40,8 +38,8 @@ namespace DBAssistance.BussinesLayer.Services.TimetableService
         private bool IsStartTimeBeforeEndTime
         {
             get { 
-                return Convert.ToInt32(HourToStr(_startTime)) 
-                          < Convert.ToInt32(HourToStr(_endTime)); 
+                return Convert.ToInt32(Hour24ToMilitaryFormatStr(_startTime)) 
+                          < Convert.ToInt32(Hour24ToMilitaryFormatStr(_endTime)); 
             }
         }
 
@@ -52,7 +50,7 @@ namespace DBAssistance.BussinesLayer.Services.TimetableService
 
         
 
-        private string HourToStr(string hour)
+        private string Hour24ToMilitaryFormatStr(string hour)
         {
             string hh = hour.Substring(0, hour.IndexOf(":"));
             string mm = hour.Substring(hour.IndexOf(":") + 1, 2);
@@ -65,27 +63,20 @@ namespace DBAssistance.BussinesLayer.Services.TimetableService
             get {
                 if (!this.IsValidTimeTable) return -1;
 
-                string start = HourToStr(_startTime);
-                string end = HourToStr(_endTime);
+                string start = Hour24ToMilitaryFormatStr(_startTime);
+                string end = Hour24ToMilitaryFormatStr(_endTime);
 
                 return Convert.ToInt32(start+end);
             }
         }
-
-        //public async Task<bool> IsNewKeySugess()
-        //{
-        //    return await _timetableRepository.TimetableKeyExistAsync(keySuggest);
-        //}
-
-        
 
         public KeyBuilderForTimeTable(string startTime, string endTime)
         {
             _startTime = startTime;
             _endTime = endTime;
 
-            _isValidStarTime = TimetableValidator.test24FormatHour(_startTime);
-            _isValidEndTime= TimetableValidator.test24FormatHour(_endTime);
+            //_isValidStarTime = TimetableValidator.test24FormatHour(_startTime);
+            //_isValidEndTime= TimetableValidator.test24FormatHour(_endTime);
         }
 
     }

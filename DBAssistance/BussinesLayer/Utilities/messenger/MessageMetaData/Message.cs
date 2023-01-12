@@ -4,18 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DBAssistance.BussinesLayer.Utilities.messenger
+namespace DBAssistance.BussinesLayer.Utilities.messenger.MessageMetaData
 {
-    public class InformationMetaData : IInformationMetaData
+    public class Message
     {
         public int Token { get; set; }
         public string Description { get; set; }
 
-        public InformationMetaData(int token, string description)
+        public Message(string description, int token)
         {
-            Token = token;
             Description = description;
+            Token = token;
         }
-
     }
 }
