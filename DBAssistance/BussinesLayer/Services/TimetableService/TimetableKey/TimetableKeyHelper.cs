@@ -10,6 +10,7 @@ namespace DBAssistance.BussinesLayer.Services.TimetableService.TimetableKeySugge
     public class TimetableKeyHelper : ITimetableKeyHelper
     {
         private ITimetableRules _timetableRules;
+        private int _keySuggested = -1;
 
         public ITimetableRules PeriodValidator
         {
@@ -23,14 +24,20 @@ namespace DBAssistance.BussinesLayer.Services.TimetableService.TimetableKeySugge
 
         public int keySuggest()
         {
-            if (!PeriodValidator.IsValidTimeTable) return -1;
+            return _keySuggested;
+        }
 
-            return PeriodDefined.MilitaryFormat();
+        private void PrepareKeySuggest()
+        {
+            _keySuggested = -1;
+            if (PeriodValidator.IsValidTimeTable) 
+                _keySuggested = PeriodDefined.MilitaryFormat();
         }
 
         public TimetableKeyHelper(IPeriodBetweenHours period)
         {
             _timetableRules = new TimetableRules(period);
+            PrepareKeySuggest();
         }
 
     }

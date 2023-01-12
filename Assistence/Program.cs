@@ -9,6 +9,8 @@ using DBAssistance.BussinesLayer.Services.CourseService;
 using DBAssistance.BussinesLayer.Services.StudentService;
 using DBAssistance.BussinesLayer.Services.GroupService;
 
+using DBAssistance.BussinesLayer.Services.TimetableService.TimetableValidator;
+
 using Microsoft.EntityFrameworkCore;
 using DBAssistance.BussinesLayer.Repositories.TimetableRepository;
 using DBAssistance.BussinesLayer.Services.TimetableService;
@@ -42,6 +44,8 @@ builder.Services.AddScoped<ICourseService, CourseService>();
 builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddScoped<IGroupService, GroupService>();
 builder.Services.AddScoped<ITimetableService, TimetableService>();
+
+builder.Services.AddScoped<ITimetableValidatorTool, TimetableValidatorTool>();
 
 
 

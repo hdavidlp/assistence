@@ -36,8 +36,9 @@ namespace DBAssistance.BussinesLayer.Utilities
             CreateMap<Timetable, TimetableDto>();
             CreateMap<TimetableForCreation, Timetable>();
             CreateMap<TimetableForUpdateDto, Timetable>();
+            CreateMap<Timetable, Timetable>();
 
-            
+
         }
     }
 }
