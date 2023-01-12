@@ -12,6 +12,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DBAssistance.BussinesLayer.Services.TimetableService.TimetableValidator;
+using Azure;
+using DBAssistance.BussinesLayer.Utilities.TableConst;
 
 namespace DBAssistance.BussinesLayer.Services.TimetableService
 {
@@ -70,21 +72,23 @@ namespace DBAssistance.BussinesLayer.Services.TimetableService
             return timetable;
         }
 
-        public async Task<(bool, ICollection<IInformationMetaData>)> CreateTimetable (Timetable timetable)
+        public async Task<(bool, ICollection<IInformationMetaData>)> CreateTimetable (
+            Timetable timetable)
         {
             var (isValid, _infoOperation) = await _timetableValidatorTool
                 .IsValidPeriodAndTimeTable(TimeTableDtoToPeriod(
                     _mapper.Map<TimetableDto>(timetable)));
 
-            if (!isValid) return (false, _infoOperation);
+            if (!isValid) return (OperationResult.ValidationError, _infoOperation);
 
             timetable.keyId = _timetableValidatorTool.KeyIdSuggest;
 
             var creationSuccess = await _timetableRepository.CreateTimeTableAsync(timetable);
 
-            if(!creationSuccess) return (false, addInfoOperation(new CreationNotSuccess()));
+            if(!creationSuccess) 
+                return (OperationResult.Failure, addInfoOperation(new CreationNotSuccess()));
 
-            return (true, addInfoOperation( new CreationSuccess()));
+            return (OperationResult.Success, addInfoOperation( new CreationSuccess()));
         }
 
         public async Task<(bool, ICollection<IInformationMetaData>)> UpdateTimetable(
@@ -94,7 +98,7 @@ namespace DBAssistance.BussinesLayer.Services.TimetableService
                 .IsValidPeriodAndTimeTable(TimeTableDtoToPeriod(
                     _mapper.Map<TimetableDto>(timetable)));
 
-            if (!isValid) return (false, _infoOperation);
+            if (!isValid) return (OperationResult.ValidationError, _infoOperation);
 
             var selectedTimetable = await _timetableRepository.GetTimetableAsync(id);
             _mapper.Map(timetable, selectedTimetable);
@@ -103,9 +107,10 @@ namespace DBAssistance.BussinesLayer.Services.TimetableService
             var updateSuccess= await _timetableRepository.UpdateTimetable();
 
             if (!updateSuccess) 
-                return (false, addInfoOperation(new UpdateNotComplete()));
+                return (OperationResult.Failure, addInfoOperation(new UpdateNotComplete()));
+            
 
-            return (true, addInfoOperation(new UpdateSuccess()));
+            return (OperationResult.Success, addInfoOperation(new UpdateSuccess()));
         }
     }
 }

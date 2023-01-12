@@ -22,8 +22,6 @@ namespace Assistence.Controllers
                 throw new ArgumentNullException(nameof(mapper));
         }
 
-
-
         [HttpGet]
         public ActionResult<Timetable> GetTimetable()
         {
@@ -37,11 +35,13 @@ namespace Assistence.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddTimetableOption(TimetableForCreation timetable)
+        public async Task<ActionResult> AddTimetableOption(
+            TimetableForCreation timetable)
         {
             var timeTableEntity = _mapper.Map<Timetable>(timetable);
 
-            var (creationSuccess, info) = await _timetableService.CreateTimetable(timeTableEntity);
+            var (creationSuccess, info) = 
+                await _timetableService.CreateTimetable(timeTableEntity);
 
             if (!creationSuccess) return BadRequest(info);
 
@@ -49,9 +49,11 @@ namespace Assistence.Controllers
         }
 
         [HttpPatch("id")]
-        public async Task<ActionResult> UpdateTimetable (int id, TimetableForUpdateDto timetable )
+        public async Task<ActionResult> UpdateTimetable (
+            int id, TimetableForUpdateDto timetable )
         {
-            var (updateSuccess, info) = await _timetableService.UpdateTimetable(id, timetable);
+            var (updateSuccess, info) = 
+                await _timetableService.UpdateTimetable(id, timetable);
             
             if (!updateSuccess) return BadRequest(info);
 
